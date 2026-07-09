@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
 import { registerRequest } from '../api';
 import { useAuth } from '../components/auth/useAuth';
 import type { RegisterRequest } from '../types';
@@ -25,8 +26,20 @@ export function Register() {
       const res = await registerRequest(form);
       login(res.token);
       navigate('/login');
-    } catch {
-      setError('No se pudo registrar, ¿el email o usuario ya existe?)');
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        if (!err.response) {
+          setError('No se pudo conectar con el servidor (¿backend caído o CORS?).');
+        } else if (err.response.status === 401) {
+          setError('El backend rechaza el registro (401). Revisa la config de seguridad del servidor.');
+        } else if (err.response.status === 409) {
+          setError('El usuario o email ya existe.');
+        } else {
+          setError(`Error ${err.response.status}: no se pudo registrar.`);
+        }
+      } else {
+        setError('Ocurrió un error inesperado.');
+      }
     } finally {
       setLoading(false);
     }
