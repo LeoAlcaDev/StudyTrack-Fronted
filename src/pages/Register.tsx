@@ -29,9 +29,9 @@ export function Register() {
     } catch (err) {
       if (axios.isAxiosError(err)) {
         if (!err.response) {
-          setError('No se pudo conectar con el servidor (¿backend caído o CORS?).');
+          setError('No se pudo conectar con el servidor');
         } else if (err.response.status === 401) {
-          setError('El backend rechaza el registro (401). Revisa la config de seguridad del servidor.');
+          setError('El backend rechaza el registro (401).');
         } else if (err.response.status === 409) {
           setError('El usuario o email ya existe.');
         } else {

@@ -3,6 +3,7 @@ import { ProtectedRoute } from './components/auth/ProtectedRoute'
 import { Login } from './pages/Login'
 import { Register } from './pages/Register'
 import { Dashboard } from './pages/Dashboard'
+import { CreateCourse } from './pages/CreateCourse'
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <Route path="/register" element={<Register />} />
 
       <Route path="/dashboard" element={<ProtectedRoute> <Dashboard /> </ProtectedRoute>} />
-
+      <Route path="/courses/new" element={<ProtectedRoute> <CreateCourse /> </ProtectedRoute>} />
 
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="*" element={<h1 className="p-8">404 - No encontrado</h1>} />

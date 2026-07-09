@@ -25,3 +25,22 @@ export interface Courses {
     status: CourseStatus;
 }
 
+export interface CreateCourseRequest {
+    name: string;
+    code: string;
+    credits: number;
+    grade: number;
+    status: CourseStatus;
+}
+
+export interface Page<T> {
+    content: T[];
+    totalElements: number;
+    totalPages: number;
+    size: number;
+    number: number;
+    first: boolean;
+    last: boolean;
+    empty: boolean;
+}
+
