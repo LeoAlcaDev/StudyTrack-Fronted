@@ -14,12 +14,14 @@ export interface AuthResponse {
     token: string;
 }
 
+export type CourseStatus = "EN_CURSO" | "APROBADO" | "DESAPROBADO";
+
 export interface Courses {
     id: number;
     name: string;
     code: string;
     credits: number;
     grade: number;
-    status: string;
+    status: CourseStatus;
 }
 
